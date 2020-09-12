@@ -631,7 +631,7 @@ FRAGMENT;
                 );
             }
 
-            if (strpos($outputLine, "Navigation requested: url=") !== false) {
+            if (strpos($outputLine, "Navigation requested: url=") !== false && strpos($outputLine, "isMainFrame=true") !== false) {
                 $frag0 = explode('Navigation requested: url=', $outputLine);
                 $frag1 = explode(', type=', $frag0[1]);
                 $this->requestedUrls[] = $frag1[0];
