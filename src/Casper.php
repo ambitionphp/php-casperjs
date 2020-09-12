@@ -22,6 +22,7 @@ class Casper
     private $script = '';
     private $output = array();
     private $requestedUrls = array();
+    private $navigationRequestedLines = array();
     private $currentUrl = '';
     private $userAgent = 'casper';
     // default viewport values
@@ -632,6 +633,7 @@ FRAGMENT;
             }
 
             if (strpos($outputLine, "Navigation requested: url=") !== false && strpos($outputLine, "isMainFrame=true") !== false) {
+                $this->navigationRequestedLines[] = $outputLine;
                 $frag0 = explode('Navigation requested: url=', $outputLine);
                 $frag1 = explode(', type=', $frag0[1]);
                 $this->requestedUrls[] = $frag1[0];
@@ -691,6 +693,11 @@ FRAGMENT;
     public function getRequestedUrls()
     {
         return $this->requestedUrls;
+    }
+    
+    public function navigationRequestedLines()
+    {
+        return $this->navigationRequestedLines;
     }
 
     public function getCurrentPageContent()
